@@ -9,7 +9,7 @@
 
 AIanusPlayerControllerBase::AIanusPlayerControllerBase()
 {
-	DisableInput(this);
+	//DisableInput(this);
 }
 
 void AIanusPlayerControllerBase::BeginPlay()
@@ -23,69 +23,20 @@ void AIanusPlayerControllerBase::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("Jump", IE_Pressed, this, &AIanusPlayerControllerBase::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &AIanusPlayerControllerBase::StopJumping);
-
-	InputComponent->BindAxis("MoveForward", this, &AIanusPlayerControllerBase::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &AIanusPlayerControllerBase::MoveRight);
-	InputComponent->BindAxis("Turn", this, &APlayerController::AddYawInput);
-	InputComponent->BindAxis("LookUp", this, &APlayerController::AddPitchInput);
 }
 
 void AIanusPlayerControllerBase::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
 
-	EnableInput(this);
+	//EnableInput(this);
 }
 
 void AIanusPlayerControllerBase::OnUnPossess()
 {
 	Super::OnUnPossess();
 
-	DisableInput(this);
-}
-
-void AIanusPlayerControllerBase::MoveForward(float Value)
-{
-	if (Value != 0.f)
-	{
-		const FRotator Rotation = GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
-		GetPawn()->AddMovementInput(Direction, Value);
-	}
-}
-
-void AIanusPlayerControllerBase::MoveRight(float Value)
-{
-	if (Value != 0.f)
-	{
-		const FRotator Rotation = GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		
-		GetPawn()->AddMovementInput(Direction, Value);
-	}
-}
-
-void AIanusPlayerControllerBase::Jump()
-{
-	if (ACharacter* IanusCharacter = Cast<ACharacter>(GetPawn()))
-	{
-		IanusCharacter->Jump();
-	}
-}
-
-void AIanusPlayerControllerBase::StopJumping()
-{
-	if (ACharacter * IanusCharacter = Cast<ACharacter>(GetPawn()))
-	{
-		IanusCharacter->StopJumping();
-	}
+	//DisableInput(this);
 }
 
 bool AIanusPlayerControllerBase::AddInventoryItem(UIanusItemBase* NewItem, int32 ItemCount, int32 ItemLevel, bool bAutoSlot)

@@ -138,11 +138,4 @@ protected:
 
 	/** Called when a global save game as been loaded */
 	void HandleSaveGameLoaded(UIanusSaveGame* NewSaveGame);
-
-private:
-	void MoveForward(float Value);
-	void MoveRight(float Value);
-
-	void Jump();
-	void StopJumping();
 };
