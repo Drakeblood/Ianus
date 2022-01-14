@@ -98,10 +98,10 @@ void AIanusCharacterBase::RemoveStartupGameplayAbilities()
 	}
 }
 
-//void AIanusCharacterBase::OnItemSlotChanged(FIanusItemSlot ItemSlot, UIanusItemBase* Item)
-//{
-//	RefreshSlottedGameplayAbilities();
-//}
+void AIanusCharacterBase::OnItemSlotChanged(FIanusItemSlot ItemSlot, UIanusItemBase* Item)
+{
+	RefreshSlottedGameplayAbilities();
+}
 
 void AIanusCharacterBase::RefreshSlottedGameplayAbilities()
 {
@@ -125,13 +125,13 @@ void AIanusCharacterBase::FillSlottedAbilitySpecs(TMap<FIanusItemSlot, FGameplay
 	}
 
 	// Now potentially override with inventory
-	/*if (InventorySource)
+	if (InventorySource)
 	{
-		const TMap<FIanusItemSlot, UIanusItem*>& SlottedItemMap = InventorySource->GetSlottedItemMap();
+		const TMap<FIanusItemSlot, UIanusItemBase*>& SlottedItemMap = InventorySource->GetSlottedItemMap();
 
-		for (const TPair<FIanusItemSlot, UIanusItem*>& ItemPair : SlottedItemMap)
+		for (const TPair<FIanusItemSlot, UIanusItemBase*>& ItemPair : SlottedItemMap)
 		{
-			UIanusItem* SlottedItem = ItemPair.Value;
+			UIanusItemBase* SlottedItem = ItemPair.Value;
 
 			// Use the character level as default
 			int32 AbilityLevel = GetCharacterLevel();
@@ -148,7 +148,7 @@ void AIanusCharacterBase::FillSlottedAbilitySpecs(TMap<FIanusItemSlot, FGameplay
 				SlottedAbilitySpecs.Add(ItemPair.Key, FGameplayAbilitySpec(SlottedItem->GrantedAbility, AbilityLevel, INDEX_NONE, SlottedItem));
 			}
 		}
-	}*/
+	}
 }
 
 void AIanusCharacterBase::AddSlottedGameplayAbilities()
@@ -213,13 +213,13 @@ void AIanusCharacterBase::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	// Try setting the inventory source, this will fail for AI
-	/*InventorySource = NewController;
+	InventorySource = NewController;
 
 	if (InventorySource)
 	{
 		InventoryUpdateHandle = InventorySource->GetSlottedItemChangedDelegate().AddUObject(this, &AIanusCharacterBase::OnItemSlotChanged);
 		InventoryLoadedHandle = InventorySource->GetInventoryLoadedDelegate().AddUObject(this, &AIanusCharacterBase::RefreshSlottedGameplayAbilities);
-	}*/
+	}
 
 	// Initialize our abilities
 	if (AbilitySystemComponent)
@@ -232,7 +232,7 @@ void AIanusCharacterBase::PossessedBy(AController* NewController)
 void AIanusCharacterBase::UnPossessed()
 {
 	// Unmap from inventory source
-	/*if (InventorySource && InventoryUpdateHandle.IsValid())
+	if (InventorySource && InventoryUpdateHandle.IsValid())
 	{
 		InventorySource->GetSlottedItemChangedDelegate().Remove(InventoryUpdateHandle);
 		InventoryUpdateHandle.Reset();
@@ -241,7 +241,7 @@ void AIanusCharacterBase::UnPossessed()
 		InventoryLoadedHandle.Reset();
 	}
 
-	InventorySource = nullptr;*/
+	InventorySource = nullptr;
 }
 
 void AIanusCharacterBase::OnRep_Controller()

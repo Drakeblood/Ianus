@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "UObject/ScriptInterface.h"
 #include "AbilitySystemInterface.h"
+#include "IanusInventoryInterface.h"
 #include "Abilities/IanusAbilitySystemComponent.h"
 #include "Abilities/IanusAttributeSet.h"
 #include "GenericTeamAgentInterface.h"
@@ -17,7 +18,7 @@ class UIanusGameplayAbility;
 class UGameplayEffect;
 
 UCLASS()
-class IANUS_API AIanusCharacterBase : public ACharacter, public IGenericTeamAgentInterface
+class IANUS_API AIanusCharacterBase : public ACharacter, public IGenericTeamAgentInterface, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -47,8 +48,8 @@ protected:
 		UIanusAttributeSet* AttributeSet;
 
 	/** Cached pointer to the inventory source for this character, can be null */
-	//UPROPERTY()
-		//TScriptInterface<IIanusInventoryInterface> InventorySource;
+	UPROPERTY()
+		TScriptInterface<IIanusInventoryInterface> InventorySource;
 
 	/** If true we have initialized our abilities */
 	UPROPERTY()
@@ -71,7 +72,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	// Implement IAbilitySystemInterface
-	UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	/** Returns current health, will be 0 if dead */
 	UFUNCTION(BlueprintCallable)
@@ -171,7 +172,7 @@ protected:
 		void OnMoveSpeedChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
 
 	/** Called when slotted items change, bound to delegate on interface */
-	void OnItemSlotChanged(FIanusItemSlot ItemSlot, UIanusItem* Item);
+	void OnItemSlotChanged(FIanusItemSlot ItemSlot, UIanusItemBase* Item);
 	void RefreshSlottedGameplayAbilities();
 
 	/** Apply the startup gameplay abilities and effects */

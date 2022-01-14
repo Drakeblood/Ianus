@@ -5,7 +5,7 @@
 #include "UObject/PrimaryAssetId.h"
 #include "IanusItemSlot.generated.h"
 
-class UIanusItem;
+class UIanusItemBase;
 class UIanusSaveGame;
 
 /** Struct representing a slot for an item, shown in the UI */
@@ -57,3 +57,7 @@ struct IANUS_API FIanusItemSlot
 		return ItemType.IsValid() && SlotNumber >= 0;
 	}
 };
+
+/** Delegate called when the contents of an inventory slot change */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSlottedItemChanged, FIanusItemSlot, ItemSlot, UIanusItemBase*, Item);
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSlottedItemChangedNative, FIanusItemSlot, UIanusItemBase*);

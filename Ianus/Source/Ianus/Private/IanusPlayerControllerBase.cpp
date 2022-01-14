@@ -25,20 +25,6 @@ void AIanusPlayerControllerBase::SetupInputComponent()
 
 }
 
-void AIanusPlayerControllerBase::OnPossess(APawn* InPawn)
-{
-	Super::OnPossess(InPawn);
-
-	//EnableInput(this);
-}
-
-void AIanusPlayerControllerBase::OnUnPossess()
-{
-	Super::OnUnPossess();
-
-	//DisableInput(this);
-}
-
 bool AIanusPlayerControllerBase::AddInventoryItem(UIanusItemBase* NewItem, int32 ItemCount, int32 ItemLevel, bool bAutoSlot)
 {
 	bool bChanged = false;

@@ -11,10 +11,6 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryItemChanged, bool, bAdded, UIanusItemBase*, Item);
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnInventoryItemChangedNative, bool, UIanusItemBase*);
 
-/** Delegate called when the contents of an inventory slot change */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSlottedItemChanged, FIanusItemSlot, ItemSlot, UIanusItemBase*, Item);
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSlottedItemChangedNative, FIanusItemSlot, UIanusItemBase*);
-
 /** Delegate called when the entire inventory has been loaded, all items may have been replaced */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryLoaded);
 DECLARE_MULTICAST_DELEGATE(FOnInventoryLoadedNative);
