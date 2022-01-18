@@ -50,8 +50,6 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
-	virtual void OnPossess(APawn* InPawn) override;
-	virtual void OnUnPossess() override;
 
 	/** Called after the inventory was changed and we notified all delegates */
 	UFUNCTION(BlueprintImplementableEvent, Category = Inventory)
