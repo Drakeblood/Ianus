@@ -156,17 +156,17 @@ void UIanusAT_MontageAndWaitForEvent::Activate()
 		}
 		else
 		{
-			ABILITY_LOG(Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent call to PlayMontage failed!"));
+			UE_LOG(LogTemp, Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent call to PlayMontage failed!"));
 		}
 	}
 	else
 	{
-		ABILITY_LOG(Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent called on invalid AbilitySystemComponent"));
+		UE_LOG(LogTemp, Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent called on invalid AbilitySystemComponent"));
 	}
 
 	if (!bPlayedMontage)
 	{
-		ABILITY_LOG(Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent called in Ability %s failed to play montage %s; Task Instance Name %s."), *Ability->GetName(), *GetNameSafe(MontageToPlay), *InstanceName.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("UIanusAbilityTask_PlayMontageAndWaitForEvent called in Ability %s failed to play montage %s; Task Instance Name %s."), *Ability->GetName(), *GetNameSafe(MontageToPlay), *InstanceName.ToString());
 		if (ShouldBroadcastAbilityTaskDelegates())
 		{
 			OnCancelled.Broadcast(FGameplayTag(), FGameplayEventData());
@@ -178,7 +178,7 @@ void UIanusAT_MontageAndWaitForEvent::Activate()
 
 void UIanusAT_MontageAndWaitForEvent::ExternalCancel()
 {
-	check(AbilitySystemComponent);
+	check(AbilitySystemComponent.Get());
 
 	OnAbilityCancelled();
 
@@ -226,7 +226,7 @@ bool UIanusAT_MontageAndWaitForEvent::StopPlayingMontage()
 
 	// Check if the montage is still playing
 	// The ability would have been interrupted, in which case we should automatically stop the montage
-	if (AbilitySystemComponent && Ability)
+	if (AbilitySystemComponent.Get() && Ability)
 	{
 		if (AbilitySystemComponent->GetAnimatingAbility() == Ability
 			&& AbilitySystemComponent->GetCurrentMontage() == MontageToPlay)

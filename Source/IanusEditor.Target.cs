@@ -8,7 +8,8 @@ public class IanusEditorTarget : TargetRules
 	public IanusEditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "Ianus" } );
+		DefaultBuildSettings = BuildSettingsVersion.V3;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+        ExtraModuleNames.AddRange( new string[] { "Ianus" } );
 	}
 }

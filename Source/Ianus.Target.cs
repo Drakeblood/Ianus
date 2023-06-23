@@ -8,7 +8,8 @@ public class IanusTarget : TargetRules
 	public IanusTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "Ianus" } );
+		DefaultBuildSettings = BuildSettingsVersion.V3;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+        ExtraModuleNames.AddRange( new string[] { "Ianus" } );
 	}
 }

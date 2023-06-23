@@ -23,6 +23,6 @@ void UIanusTargetType_UseEventData::GetTargets_Implementation(AIanusCharacterBas
 	}
 	else if (EventData.Target)
 	{
-		OutActors.Add(const_cast<AActor*>(EventData.Target));
+		OutActors.Add(const_cast<AActor*>(EventData.Target.Get()));
 	}
 }
